@@ -105,10 +105,12 @@ polybar bar 2>&1 | tee -a /tmp/polybar.log & disown
 echo "Bars launched..."
 ```
 
-After that at the line at the end of the i3 config file.
+After that at this line at the end of the i3 config file.
 ```
 exec_always ~/.config/polybar/launch.sh &
 ```
+
+<br/>
 
 Add more font by download font in nerdfont. After that, unzip into ~/.fonts
 Change font in config file, ~/.config/i3/config and ~/.config/polybar/config.ini
