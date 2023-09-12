@@ -16,12 +16,32 @@
 
 - [Forest](https://whvn.cc/dgpy2m)
 
-### Add display wallpaper
-Insert this line of code at the end of the config file.
+<br/>
+
+### change background wallpaper
+Find this line of code.
 ```shell
-# display wallpaper
-exec_always feh --bg-fill <image_location>
+# set wallpaper
+exec_always --no-startup-id sleep 1 && feh --bg-fill <wallpaper_location>
 ```
+Choose new background image in <wallpaper_location>.
+
+<br/>
+
+### change login background wallpaper
+Open file slick-greeter.conf as root to modify. 
+```shell
+$ cd /etc/lightdm/
+$ sudo nvim slick-greeter.conf
+```
+
+In this file change the background value to new wallpaper location.
+```
+[greeter]
+background=<wallpaper_location>
+```
+
+<br/>
 
 ## Customize the status bar in the i3 WM
 
@@ -41,7 +61,7 @@ bar {
 }
 ```
 
-## Polybary
+## Polybar
 
 Install polybar.
 ```shell
@@ -61,7 +81,7 @@ $ sudo cp /etc/polybar/config.ini ~/.config/polybar
 $ sudo chown $USER:$USER ~/.config/polybar/config 
 ```
 
-Example launch script.
+Default launch script.
 ```shell
 #!/usr/bin/env bash
 
@@ -78,3 +98,4 @@ polybar bar2 2>&1 | tee -a /tmp/polybar2.log & disown
 
 echo "Bars launched..."
 ```
+
