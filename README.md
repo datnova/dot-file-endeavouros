@@ -105,7 +105,7 @@ polybar bar 2>&1 | tee -a /tmp/polybar.log & disown
 echo "Bars launched..."
 ```
 
-After that at this line at the end of the i3 config file.
+After that add this line at the end of the i3 config file.
 ```
 exec_always ~/.config/polybar/launch.sh &
 ```
