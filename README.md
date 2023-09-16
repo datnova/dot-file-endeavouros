@@ -1,8 +1,52 @@
-## i3 config location
-~/.config/i3/config
+## Customize the i3 config
 
+Update the i3 config file.
+```shell
+$ mv ~/.config/i3/config ~/.config/i3/config.bk
+$ cp ./i3/config ~/.config/i3/config
+```
 
-## Backround images
+<br/>
+
+## Install new fonts.
+
+[Download new fonts](https://www.nerdfonts.com/font-downloads)
+then unzip fonts to ```~/.fonts```. 
+After that run reload font cache to detect new fonts.
+```shell
+$ sudo fc-cache -f -v
+```
+
+<br/>
+
+## Install ibus-bamboo.
+
+Download ibus-bamboo using yay.
+```shell
+$ yay -S ibus-bamboo
+```
+
+Add ibus config at the end of `~/.bashrc`. After that, logout and login back for setting to take effect.
+```shell
+export GTK_IM_MODULE=ibus
+export XMODIFIERS=@im=ibus
+export QT_IM_MODULE=ibus
+ibus-daemon -drx
+```
+
+Change ibus-bamboo swap key and add vietnamese.
+```shell
+$ ibus-setup
+```
+
+- Change `Next input method` from `<Super>space` to `<Control>space` (if not it wont work)  
+- Navigate to `Input method` tab and add `Vietnamese - Bamboo`  
+
+Finally, logout and login back and use ctrl + space to change between VN and US keyboard.
+
+<br/>
+
+## Backround wallpapers.
 
 - [Cityscape building](https://whvn.cc/yx76vg)
 
@@ -18,13 +62,13 @@
 
 <br/>
 
-### change background wallpaper
-Find this line of code.
+### change background wallpaper in i3 config file
+Find this line of code in ```~/.config/i3/config```.
 ```shell
 # set wallpaper
 exec_always --no-startup-id sleep 1 && feh --bg-fill <wallpaper_location>
 ```
-Choose new background image in <wallpaper_location>.
+Choose new wallpaper and insert into `<wallpaper_location>`.
 
 <br/>
 
@@ -39,23 +83,6 @@ In this file change the background value to new wallpaper location.
 ```
 [greeter]
 background=<wallpaper_location>
-```
-
-<br/>
-
-## Customize the status bar in the i3WM
-
-Remove the i3 bar in config file.
-```
-$ cd .config/i3/
-$ nvim config
-```
-
-In the config file, find the bar and comment out everything.
-```
-# bar {
-#     ...
-# }
 ```
 
 <br/>
@@ -76,51 +103,11 @@ $ yay -S siji-git ttf-unifont
 Create config directory and copy config file to directory.
 ```shell
 $ mkdir ~/.config/polybar
-$ sudo cp /etc/polybar/config.ini ~/.config/polybar
-$ sudo chown $USER:$USER ~/.config/polybar/config.ini
+$ sudo cp ./polybar/ ~/.config/polybar/
+$ sudo chmod +x ~/.config/polybar/launch.sh
 ```
 
-Change name example bar into bar by editing the file ~/.config/polybar/config.ini
+note: check i3WM already had auto startup. If not then add at the end of `~/.config/i3/config`.
 ```
-# [bar/example]
-[bar/bar]
-...
-```
-
-Create `launch.sh` in ~/.config/polybar/
-Paste default launch script and add execution permission.
-```shell
-#!/usr/bin/env bash
-
-# Terminate already running bar instances
-# If all your bars have ipc enabled, you can use 
-# polybar-msg cmd quit
-# Otherwise you can use the nuclear option:
-killall -q polybar
-
-# Launch bar1 and bar2
-echo "---" | tee -a /tmp/polybar.log
-polybar bar 2>&1 | tee -a /tmp/polybar.log & disown
-
-echo "Bars launched..."
-```
-
-After that add this line at the end of the i3 config file.
-```
-exec_always ~/.config/polybar/launch.sh &
-```
-
-<br/>
-
-Add more font by download font in nerdfont. After that, unzip into ~/.fonts
-Change font in config file, ~/.config/i3/config and ~/.config/polybar/config.ini
-
-In ~/.config/polybar/config.ini
-```
-font-0: <font name>:size=10;2
-```
-
-In ~/.config/i3/config
-```
-font pango: <font name> 10
+exec_always .config/polybar/launch.sh &
 ```
