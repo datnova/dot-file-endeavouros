@@ -115,12 +115,23 @@ note: check i3WM already had auto startup. If not then add at the end of `~/.con
 exec_always .config/polybar/launch.sh &
 ```
 
+<br/>
+
 ## Keypassxc
 
-### Install Keepassxc and rclone (for backup)
+### Install Keepassxc, rclone and cronie (for backup)
 ```shell
-$ yay -S keepassxc rclone
+$ yay -S keepassxc rclone cronie
 ```
+
+### Keepass config
+Save all databases in ```~/Keepass/databases``` and backups folder is ```~/Keepass/backups```.
+
+Open ```keepassxc```, locate __Setting__ => __General__ => __Backups desktination__, set value:
+```
+/home/$USER/Keepass/backups/{DB_FILENAME}-{TIME}.old.kdbx
+```
+
 
 ### rclone config
 ```shell
@@ -135,3 +146,35 @@ Add remote storages for backup databases:
     + Yandex disk
     + Dropbox
     + Google Drive
+
+### Sync and backups config
+```shell
+$ cp ./keepass/scripts/ ~/Keepass/scripts/
+$ chmod +x ~/Keepass/scripts/*
+```
+
+### Crontab config
+Start, check and stop cronie
+```shell
+$ systemctl start cronie
+$ systemctl status cronie
+$ systemctl stop cronie
+```
+
+List all cron jobs.
+```shell
+$ crontab -l
+```
+
+Config cron job.
+```shell
+$ crontab -e
+```
+
+Apply these setting.
+```
+*/10 * * * * ~/Keepass/scripts/sync_cloud.sh >> ~/Keepass/out.log 2>&1
+
+@reboot ~/Keepass/scripts/backups_cloud.sh >> ~/Keepass/out.log 2>&1
+0 * * * * ~/Keepass/scripts/backups_cloud.sh >> ~/Keepass/out.log 2>&1
+```
