@@ -19,32 +19,35 @@ $ sudo fc-cache -f -v
 
 <br/>
 
-## Install ibus-bamboo.
-
-Download ibus-bamboo using yay.
+## Install fcitx5-unikey.
+### Download fcitx5-unikey using yay
 ```shell
-$ yay -S ibus-bamboo
+$ yay -S fcitx5-unikey
+$ yay -S kcm-fcitx5
 ```
 
-Add ibus config at the end of `~/.bashrc`. After that, logout and login back for setting to take effect.
+Add fcitx config at the end of `~/.bashrc`. After that, logout and login for setting to take effect.
 ```shell
-export GTK_IM_MODULE=ibus
-export XMODIFIERS=@im=ibus
-export QT_IM_MODULE=ibus
-ibus-daemon -drx
+export GTK_IM_MODULE=fcitx
+export XMODIFIERS=@im=fcitx
+export QT_IM_MODULE=fcitx
 ```
 
-Change ibus-bamboo swap key and add vietnamese.
+### Config input method in GUI.
 ```shell
-$ ibus-setup
+$ fcitx5-configtool
 ```
 
-- Change `Next input method` from `<Super>space` to `<Control>space` (if not it wont work)  
-- Navigate to `Input method` tab and add `Vietnamese - Bamboo`  
+In `input method` tab, add:
+- Keyboard - Englist (US)
+- Unikey
 
-Finally, logout and login back and use ctrl + space to change between VN and US keyboard.
+In `Global Options` tab, Change:
+- `Trigger Input Method` __=>__ `Control+Left Shift`
+
 
 <br/>
+
 
 ## Backround wallpapers.
 
@@ -62,7 +65,7 @@ Finally, logout and login back and use ctrl + space to change between VN and US 
 
 <br/>
 
-### change background wallpaper in i3 config file
+### change desktop background wallpaper 
 Find this line of code in ```~/.config/i3/config```.
 ```shell
 # set wallpaper
@@ -94,7 +97,7 @@ Install polybar.
 $ yay -S polybar
 ```
 
-Install font for polybar example.
+Install font for polybar.
 ```shell
 $ sudo pacman -S xorg-fonts-misc
 $ yay -S siji-git ttf-unifont
@@ -111,3 +114,24 @@ note: check i3WM already had auto startup. If not then add at the end of `~/.con
 ```
 exec_always .config/polybar/launch.sh &
 ```
+
+## Keypassxc
+
+### Install Keepassxc and rclone (for backup)
+```shell
+$ yay -S keepassxc rclone
+```
+
+### rclone config
+```shell
+$ rclone config
+```
+Add remote storages for backup databases:
+- Near live
+    + Onedrive
+
+- Hourly
+    + Box
+    + Yandex disk
+    + Dropbox
+    + Google Drive
