@@ -1,7 +1,7 @@
 #!/bin/bash
 
 CLOUDS=("Box" "Dropbox" "Gdrive" "Yandisk")
-BACKUP_SOURCE_DIR=~/Keepass/backups/
+BACKUP_SOURCE_DIR=~/.config/Keepassxc/backups/
 BACKUP_TARGET_DIR=Keepass/Backups/ 
 
 for cloud in "${CLOUDS[@]}"; do

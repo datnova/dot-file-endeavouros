@@ -105,7 +105,7 @@ $ yay -S siji-git ttf-unifont
 
 Create config directory and copy config file to directory.
 ```shell
-$ mkdir ~/.config/polybar
+$ mkdir -p ~/.config/polybar
 $ sudo cp ./polybar/ ~/.config/polybar/
 $ sudo chmod +x ~/.config/polybar/launch.sh
 ```
@@ -124,16 +124,16 @@ exec_always .config/polybar/launch.sh &
 $ yay -S keepassxc rclone cronie
 ```
 
-### Keepass config
-Save all databases in ```~/Keepass/databases``` and backups databases in ```~/Keepass/backups```.
+### Keepassxc config
+Save all databases in ```~/.config/keepassxc/databases``` and backups databases in ```~/.config/keepassxc/backups```.
 
 ```shell
-$ mkdir -p ~/Keepass/{databases,backups,scripts} 
+$ mkdir -p ~/.config/keepassxc/{databases,backups,scripts} 
 ```
 
 Open ```keepassxc```, locate __Setting__ => __General__ => __Backups desktination__, set value:
 ```
-/home/$USER/Keepass/backups/{DB_FILENAME}-{TIME}.old.kdbx
+/home/$USER/.config/keepassxc/backups/{DB_FILENAME}-{TIME}.old.kdbx
 ```
 
 ### rclone config
@@ -152,32 +152,35 @@ Add remote storages for backup databases:
 
 ### Sync and backups config
 ```shell
-$ cp ./keepass/scripts/ ~/Keepass/scripts/
-$ chmod +x ~/Keepass/scripts/*
+$ cp ./keepassxc/* ~/.config/keepassxc/
+$ chmod +x ~/.config/keepassxc/scripts/*.sh
 ```
 
 ### Crontab config
-Start, check and stop cronie
+Enable/Disable cronie allow/disallow it to auto startup when reboot.
 ```shell
-$ systemctl start cronie
-$ systemctl status cronie
-$ systemctl stop cronie
+$ systemctl enable cronie.service
+$ systemctl disable cronie.service
 ```
 
-List all cron jobs.
+Start, check and stop cronie service
 ```shell
+$ systemctl start cronie.service
+$ systemctl status cronie.service
+$ systemctl stop cronie.service
+```
+
+
+```shell
+# Add cron jobs config
+$ crontab ~/.config/keepassxc/scripts/cron.jobs
+# List all cron jobs. (optional)
 $ crontab -l
-```
-
-Config cron job.
-```shell
+# Config cron job. (optional)
 $ crontab -e
 ```
 
-Apply these setting.
-```
-@reboot ~/Keepass/scripts/sync_cloud.sh >> ~/Keepass/out.log 2>&1
-*/10 * * * * ~/Keepass/scripts/sync_cloud.sh >> ~/Keepass/out.log 2>&1
-@reboot ~/Keepass/scripts/backups_cloud.sh >> ~/Keepass/out.log 2>&1
-0 * * * * ~/Keepass/scripts/backups_cloud.sh >> ~/Keepass/out.log 2>&1
+## Visual studio code
+```shell
+$ yay -S visual-studio-codo-bin
 ```
