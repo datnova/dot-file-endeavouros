@@ -125,13 +125,16 @@ $ yay -S keepassxc rclone cronie
 ```
 
 ### Keepass config
-Save all databases in ```~/Keepass/databases``` and backups folder is ```~/Keepass/backups```.
+Save all databases in ```~/Keepass/databases``` and backups databases in ```~/Keepass/backups```.
+
+```shell
+$ mkdir -p ~/Keepass/{databases,backups,scripts} 
+```
 
 Open ```keepassxc```, locate __Setting__ => __General__ => __Backups desktination__, set value:
 ```
 /home/$USER/Keepass/backups/{DB_FILENAME}-{TIME}.old.kdbx
 ```
-
 
 ### rclone config
 ```shell
@@ -173,8 +176,8 @@ $ crontab -e
 
 Apply these setting.
 ```
+@reboot ~/Keepass/scripts/sync_cloud.sh >> ~/Keepass/out.log 2>&1
 */10 * * * * ~/Keepass/scripts/sync_cloud.sh >> ~/Keepass/out.log 2>&1
-
 @reboot ~/Keepass/scripts/backups_cloud.sh >> ~/Keepass/out.log 2>&1
 0 * * * * ~/Keepass/scripts/backups_cloud.sh >> ~/Keepass/out.log 2>&1
 ```
