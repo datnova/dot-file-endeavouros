@@ -1,7 +1,7 @@
 # auto sync databases
-@reboot ~/.config/keepassxc/scripts/sync_cloud.sh >> ~/.config/keepassxc/logs/sync_cloud.log 2>&1
-*/10 * * * * ~/.config/keepassxc/scripts/sync_cloud.sh >> ~/.config/keepassxc/logs/sync_cloud.log 2>&1
+@reboot ~/.config/keepassxc/scripts/sync_cloud.sh >> ~/.config/keepassxc/logs/sync.log 2>&1
+*/10 * * * * ~/.config/keepassxc/scripts/sync_cloud.sh >> ~/.config/keepassxc/logs/sync.log 2>&1
 
 # auto sync backups
-@reboot ~/.config/keepassxc/scripts/backups_cloud.sh >> ~/.config/keepassxc/logs/backups_cloud.log 2>&1
-@hourly ~/.config/keepassxc/scripts/backups_cloud.sh >> ~/.config/Keepassxc/logs/backups_cloud.log 2>&1
+@reboot ~/.config/keepassxc/scripts/backups_cloud.sh >> ~/.config/keepassxc/logs/backup.log 2>&1
+@hourly ~/.config/keepassxc/scripts/backups_cloud.sh >> ~/.config/Keepassxc/logs/backup.log 2>&1

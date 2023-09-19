@@ -128,7 +128,7 @@ $ yay -S keepassxc rclone cronie
 Save all databases in ```~/.config/keepassxc/databases``` and backups databases in ```~/.config/keepassxc/backups```.
 
 ```shell
-$ mkdir -p ~/.config/keepassxc/{databases,backups,scripts} 
+$ mkdir -p ~/.config/keepassxc/{databases,backups,scripts,logs} 
 ```
 
 Open ```keepassxc```, locate __Setting__ => __General__ => __Backups desktination__, set value:
