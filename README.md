@@ -10,8 +10,11 @@ $ cp ./i3/config ~/.config/i3/config
 
 ## Install new fonts.
 
-[Download new fonts](https://www.nerdfonts.com/font-downloads)
-then unzip fonts to ```~/.fonts```. 
+[Download new fonts](https://www.nerdfonts.com/font-downloads). Recomment `Intel One Mono` font,
+then unzip fonts to ```~/.fonts```.
+
+If you use different fonts, please remember to change __i3__ and __polybar__ config.
+
 After that run reload font cache to detect new fonts.
 ```shell
 $ sudo fc-cache -f -v
